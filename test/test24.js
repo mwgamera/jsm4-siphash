@@ -1,4 +1,4 @@
-var SipHash = SipHash || require('../siphash.js');
+var SipHash = SipHash || require('../siphash.min.js');
 var assert = assert || require('assert');
 
 // Test vectors from reference implementation of SipHash-2-4
