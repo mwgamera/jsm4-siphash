@@ -3,6 +3,7 @@ ED=ed
 NODE=nodejs
 CCC=java -jar compiler.jar
 
+all: siphash.min.js siphash.js
 siphash.js: siphash.m4 sipround.m4 int64.m4
 siphash.min.js:
 
@@ -18,7 +19,7 @@ siphash.min.js:
 		--js "$<" --js_output_file "$@"
 	-printf '%s\n' \
 		'1,$$j' \
-		's/.use strict.;\((function(){\)/\1"use strict";/' \
+		's/.use strict.;\((function([^)]*){\)/\1"use strict";/' \
 		's/case "/case"/g' \
 		w q | $(ED) -s "$@"
 
