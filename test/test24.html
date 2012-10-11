@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<pre id="log"></pre>
+<script>
+  var SipHash;
+  var assert = {
+    equal: function(actual, expected, message) {
+      if (actual !== expected)
+        throw String("Assertion failed: "+message);
+    }
+  };
+  var console = console || {};
+  console.log = (function() {
+    var e;
+    return function(str) {
+      e = e || document.getElementById("log");
+      e.appendChild(document.createTextNode(str+"\n"));
+    };
+  })();
+</script>
+<script src="../siphash.js"></script>
+<script src="test24.js" defer="defer"></script>
