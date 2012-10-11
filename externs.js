@@ -1,5 +1,5 @@
 // Node.js
-var module;
+var module = { exports: {} };
 
 /**
  * @param {string} module
