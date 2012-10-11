@@ -7,9 +7,8 @@ than using any native OO abstraction mechanisms of Javascript.
 In comments below, following mnemonics are used:
 reg64 - name of virtual register
 expr  - Javascript expression, evaluated at run time
-mem   - Javascript expression evaluating to lvalue
+mem   - Javascript lvalue
 imm   - Constant integer expression calculated by m4 with eval
-hxstr - hexadecimal constant with optional leading `0x'
 
 Macros starting with underscore are meant for internal use.
 
