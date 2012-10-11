@@ -57,8 +57,8 @@ $1.l = al`'dnl
 _64leave(3)')
 
 
-# rotl64(reg64, imm) - rotate left by constant size <= 32
-define(`rotl64',`ifelse(32,eval($2), dnl
+# rol64(reg64, imm) - rotate left by constant size <= 32
+define(`rol64',`ifelse(32,eval($2), dnl
 `_swap64(`$1')',`_64rotl(`$1',`$2')')')
 
 # _swap64(reg64) - swap words in register
