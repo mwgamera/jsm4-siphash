@@ -53,17 +53,17 @@ String(siphash24(k)(m)); // returns 'a129ca6149be45e5'
 ```
 
 Hash table protected from hash flooding regardless
-of goodness of Javascript engine's hash:
+of goodness of Javascript engine's hash (not the most efficient implementation):
 ```javascript
 var hash = (function() {
   var h = SipHash()();
   var d = {};
   return {
     set: function(k,v) {
-      return d[+h(k)] = v;
+      return d[k+h(k)] = v;
     },
     get: function(k) {
-      return d[+h(k)];
+      return d[k+h(k)];
     }
   };
 })();
