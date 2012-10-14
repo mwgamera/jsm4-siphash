@@ -91,8 +91,7 @@ like Google's Closure Compiler or minify before actually using it, so why
 couldn't I just put some additional preprocessing in that pipeline.
 
 I've chosen to use good old `m4` macro processor.
-It's not the most suitable processor for Javascript, note for example
-that quirky ``undefine(`substr')`` line at the beginning, but,
+It's not the most suitable processor for Javascript, but,
 unlike others, it is readily available just about everywhere
 (it's in POSIX) and powerful enough to actually do the job easily.
 The code should be compillable to plain Javascript on any Unix-like

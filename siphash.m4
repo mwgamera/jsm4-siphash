@@ -2,7 +2,6 @@
 
 // include(`int64.m4')
 // include(`sipround.m4')
-// undefine(`substr')
 
 (function() {
   "use strict";
@@ -29,7 +28,7 @@
     var p = "00000000",
         l = p + (this["l"] >>> 0).toString(16),
         h = p + (this["h"] >>> 0).toString(16);
-    return h.substr(h.length-8) + l.substr(l.length-8);
+    return h.slice(-8) + l.slice(-8);
   };
 
   /**
@@ -74,7 +73,7 @@
         load64(v2, init.v2);
         load64(v3, init.v3);
 
-        message += "\x00\x00\x00\x00\x00\x00\x00".substr(j & 7);
+        message += "\x00\x00\x00\x00\x00\x00\x00".slice(j & 7);
         message += String.fromCharCode(j & 0xff);
 
         for (i = 0; i < message.length; i += 8) {
