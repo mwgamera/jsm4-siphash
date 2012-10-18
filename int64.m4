@@ -7,7 +7,6 @@ than using any native OO abstraction mechanisms of Javascript.
 In comments below, following mnemonics are used:
 reg64 - name of virtual register
 expr  - Javascript expression, evaluated at run time
-mem   - Javascript lvalue
 imm   - Constant integer expression calculated by m4 with eval
 
 Macros starting with underscore are meant for internal use.
@@ -42,19 +41,13 @@ ah = ifelse($3,,`0',`$3'), dnl
 al = ifelse($2,,`0',`$2')`'dnl
 _64leave(3)')
 
-# load64(reg64, mem) - load value to register from some object
-define(`load64',`dnl
+# mov64(reg64, reg64) - copy value of register
+define(`mov64',`dnl
 _64enter3reg(`a',$1)dnl
-ah = $2.h, dnl
-al = $2.l`'dnl
-_64leave(3)')
-
-# store64(mem, reg64) - copy value from register to some object
-define(`store64',`dnl
-_64enter3reg(`a',$2)dnl
-($1 || ($1 = {})).h = ah, dnl
-$1.l = al`'dnl
-_64leave(3)')
+_64enter3reg(`b',$2)dnl
+ah = bh, dnl
+al = bl`'dnl
+_64leave(6)')
 
 
 # rol64(reg64, imm) - rotate left by constant size <= 32

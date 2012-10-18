@@ -53,10 +53,21 @@
 
     /**
      * Create pre-keyed hash function.
-     * @param {Object} init precomputed initial state
+     * @param {number} reg64l(p0) precomputed initial state
+     * @param {number} reg64h(p0)
+     * @param {number} reg64l(p1)
+     * @param {number} reg64h(p1)
+     * @param {number} reg64l(p2)
+     * @param {number} reg64h(p2)
+     * @param {number} reg64l(p3)
+     * @param {number} reg64h(p3)
      * @return {function(string): Hashval}
      **/
-    var digest = function(init) {
+    var digest = function(
+        reg64l(p0), reg64h(p0),
+        reg64l(p1), reg64h(p1),
+        reg64l(p2), reg64h(p2),
+        reg64l(p3), reg64h(p3)) {
       /**
        * @param {string} message
        * @return {Hashval}
@@ -68,10 +79,10 @@
             cd = d,
             cw = w32le;
 
-        load64(v0, init.v0);
-        load64(v1, init.v1);
-        load64(v2, init.v2);
-        load64(v3, init.v3);
+        mov64(v0, p0);
+        mov64(v1, p1);
+        mov64(v2, p2);
+        mov64(v3, p3);
 
         message += "\x00\x00\x00\x00\x00\x00\x00".slice(j & 7);
         message += String.fromCharCode(j & 0xff);
@@ -103,8 +114,7 @@
      **/
     return function(key) {
       var var64(v0, v1, v2, v3, k0, k1),
-          initstate = {}, buf,
-          I32MAX = 0x100000000;
+          buf, I32MAX = 0x100000000;
 
       switch (typeof key) {
 
@@ -148,12 +158,11 @@
       xor64(v2, k0);
       xor64(v3, k1);
 
-      store64(initstate.v0, v0);
-      store64(initstate.v1, v1);
-      store64(initstate.v2, v2);
-      store64(initstate.v3, v3);
-
-      return digest(initstate);
+      return digest(
+          reg64l(v0),reg64h(v0),
+          reg64l(v1),reg64h(v1),
+          reg64l(v2),reg64h(v2),
+          reg64l(v3),reg64h(v3));
     };
   };
 
